@@ -24,6 +24,7 @@ Apify.main(async () => {
 
   async function handlePageFunction({ request, $ }) {
     console.log("ciao");
+    console.log({ request, $ });
     // const schema = extractSchema($);
     // var result = extractInfo({ $, schema });
 
