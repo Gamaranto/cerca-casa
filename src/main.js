@@ -23,6 +23,7 @@ Apify.main(async () => {
   // ***********************
 
   async function handlePageFunction({ request, $ }) {
+    console.log(request);
     // const schema = extractSchema($);
     // var result = extractInfo({ $, schema });
     console.log($("title").text());
