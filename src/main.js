@@ -23,9 +23,9 @@ Apify.main(async () => {
   // ***********************
 
   async function handlePageFunction({ request, $ }) {
-    const schema = extractSchema($);
-    var result = extractInfo({ $, schema });
-    console.log(result);
+    // const schema = extractSchema($);
+    // var result = extractInfo({ $, schema });
+    console.log($("title").text());
 
     const enqueued = await enqueueLinks({
       $,
