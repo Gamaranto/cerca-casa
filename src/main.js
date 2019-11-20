@@ -23,11 +23,9 @@ Apify.main(async () => {
   // ***********************
 
   async function handlePageFunction({ request, $ }) {
-    console.log("ciao");
-    console.log({ request, $ });
     // const schema = extractSchema($);
     // var result = extractInfo({ $, schema });
-
+    console.log($("title").text());
     const enqueued = await enqueueLinks({
       $,
       requestQueue,
@@ -35,8 +33,5 @@ Apify.main(async () => {
       baseUrl: request.loadedUrl
     });
     console.log(`Enqueued ${enqueued.length} URLs.`);
-    return {
-      title: $("title").text()
-    };
   }
 });
