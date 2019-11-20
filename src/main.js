@@ -29,7 +29,7 @@ Apify.main(async () => {
     const enqueued = await enqueueLinks({
       $,
       requestQueue,
-      pseudoUrls: ["http[s?]://www.casa.it/[.*]/affitto/pisa[.*]"],
+      pseudoUrls: ["https://www.casa.it/[.*]/affitto/pisa[.*]"],
       baseUrl: request.loadedUrl
     });
     console.log(`Enqueued ${enqueued.length} URLs.`);
