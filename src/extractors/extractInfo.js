@@ -1,5 +1,5 @@
 function extractInfo({ $, schema: rawSchema }) {
-  var schema = rawSchema["@graph"][2];
+  var schema = rawSchema["@graph"][2] || {};
 
   var title = getTitle();
   var { url } = schema;
