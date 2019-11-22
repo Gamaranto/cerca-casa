@@ -1,5 +1,4 @@
 function extractInfo({ $, schema: rawSchema }) {
-  console.log(rawSchema);
   var schema = rawSchema["@graph"][2] || {};
 
   var title = getTitle();

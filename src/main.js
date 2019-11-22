@@ -15,7 +15,8 @@ Apify.main(async () => {
   const crawler = new Apify.CheerioCrawler({
     maxRequestsPerCrawl: 20,
     requestQueue,
-    handlePageFunction
+    handlePageFunction,
+    useApifyProxy: true
   });
 
   await crawler.run();
@@ -23,8 +24,8 @@ Apify.main(async () => {
   // ***********************
 
   async function handlePageFunction({ request, $ }) {
-    // const schema = extractSchema($);
-    // var result = extractInfo({ $, schema });
+    const schema = extractSchema($);
+    var result = extractInfo({ $, schema });
     console.log($("title").text());
     const enqueued = await enqueueLinks({
       $,
@@ -33,5 +34,6 @@ Apify.main(async () => {
       baseUrl: request.loadedUrl
     });
     console.log(`Enqueued ${enqueued.length} URLs.`);
+    return result;
   }
 });
