@@ -6,6 +6,7 @@ function routeContext(sources, pageFns) {
     var { pseudoUrls } = getSourceFromUrl(sources, topUrl);
     var fnKey = topUrl.replace(/https?:\/\//g, "").replace(/(w|\.)/g, "");
     var result = pageFns[fnKey](context);
+    console.log({ result, pseudoUrls });
     return {
       result,
       pseudoUrls
