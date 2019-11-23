@@ -3,8 +3,7 @@ const {
   utils: { enqueueLinks }
 } = Apify;
 
-const extractSchema = require("./extractors/extractSchema");
-const extractInfo = require("./extractors/extractInfo");
+const casait = require("./extractors/casait");
 
 Apify.main(async () => {
   const requestQueue = await Apify.openRequestQueue();
@@ -24,16 +23,26 @@ Apify.main(async () => {
   // ***********************
 
   async function handlePageFunction({ request, $ }) {
-    const schema = extractSchema($);
-    var result = extractInfo({ $, schema });
+    const casaScraper = pageFunction({ request, $ }, casait);
+    var result = await casaScraper();
     console.log($("title").text());
+
     const enqueued = await enqueueLinks({
       $,
       requestQueue,
       pseudoUrls: ["https://www.casa.it/[.*]/affitto/pisa[.*]"],
       baseUrl: request.loadedUrl
     });
+
     console.log(`Enqueued ${enqueued.length} URLs.`);
     await Apify.pushData(result);
   }
 });
+
+// ********** Refactor the page function
+
+function pageFunction(context, fn) {
+  return function(options) {
+    return fn(context, options);
+  };
+}
