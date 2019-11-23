@@ -3,14 +3,8 @@ const {
   utils: { enqueueLinks }
 } = Apify;
 
-const { getSourceFromUrl } = require("./utils/getSourceFromUrl");
-const { matchTopLevel } = require("./utils/matchTopLevel");
-const { pageFunction } = require("./utils/pageFunction");
-
-const casait = require("./extractors/casait/casait");
-
-const matchCasa = matchTopLevel("www.casa.it");
-const matchImmobiliare = matchTopLevel("www.immobiliare.it");
+const extractors = require("./extractors/index");
+const routeContext = require("./utils/routeContext");
 
 Apify.main(async () => {
   const input = await Apify.getInput();
@@ -19,6 +13,9 @@ Apify.main(async () => {
   }
 
   const { sources } = input;
+
+  const pageFunction = routeContext(sources, extractors);
+
   const urls = sources.map(({ url }) => ({
     url
   }));
@@ -29,7 +26,7 @@ Apify.main(async () => {
   const requestQueue = await Apify.openRequestQueue();
 
   const crawler = new Apify.CheerioCrawler({
-    maxRequestsPerCrawl: 40,
+    maxRequestsPerCrawl: 20,
     requestList,
     requestQueue,
     handlePageFunction,
@@ -41,19 +38,7 @@ Apify.main(async () => {
   // ***********************
 
   async function handlePageFunction({ request, $ }) {
-    // Check what URL we are on
-
-    if (matchCasa(request.url)) {
-      var { pseudoUrls } = getSourceFromUrl(sources, "www.casa.it");
-      const casaScraper = pageFunction({ request, $ }, casait);
-      var result = casaScraper();
-    }
-
-    if (matchImmobiliare(request.url)) {
-      var { pseudoUrls } = getSourceFromUrl(sources, "www.immobiliare.it");
-      console.log(request.loadedUrl);
-      console.log($("title").text());
-    }
+    const { result, pseudoUrls } = pageFunction({ request, $ });
 
     const enqueued = await enqueueLinks({
       $,
