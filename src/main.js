@@ -3,7 +3,7 @@ const {
   utils: { enqueueLinks }
 } = Apify;
 
-const casait = require("./extractors/casait");
+const casait = require("./extractors/casait/casait");
 
 Apify.main(async () => {
   const requestQueue = await Apify.openRequestQueue();
@@ -12,10 +12,9 @@ Apify.main(async () => {
   });
 
   const crawler = new Apify.CheerioCrawler({
-    maxRequestsPerCrawl: 40,
+    maxRequestsPerCrawl: 20,
     requestQueue,
-    handlePageFunction,
-    useApifyProxy: true
+    handlePageFunction
   });
 
   await crawler.run();
