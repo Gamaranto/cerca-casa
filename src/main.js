@@ -13,7 +13,7 @@ Apify.main(async () => {
   });
 
   const crawler = new Apify.CheerioCrawler({
-    maxRequestsPerCrawl: 20,
+    maxRequestsPerCrawl: 40,
     requestQueue,
     handlePageFunction,
     useApifyProxy: true
@@ -34,6 +34,6 @@ Apify.main(async () => {
       baseUrl: request.loadedUrl
     });
     console.log(`Enqueued ${enqueued.length} URLs.`);
-    return result;
+    await Apify.pushData(result);
   }
 });
