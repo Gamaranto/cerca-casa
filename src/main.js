@@ -29,10 +29,11 @@ Apify.main(async () => {
   const requestQueue = await Apify.openRequestQueue();
 
   const crawler = new Apify.CheerioCrawler({
-    maxRequestsPerCrawl: 20,
+    maxRequestsPerCrawl: 40,
     requestList,
     requestQueue,
-    handlePageFunction
+    handlePageFunction,
+    useApifyProxies: true
   });
 
   await crawler.run();
