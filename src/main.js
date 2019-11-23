@@ -39,7 +39,7 @@ Apify.main(async () => {
 
   async function handlePageFunction({ request, $ }) {
     const { result, pseudoUrls } = pageFunction({ request, $ });
-
+    console.log(result, pseudoUrls);
     const enqueued = await enqueueLinks({
       $,
       requestQueue,
