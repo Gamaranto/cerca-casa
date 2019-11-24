@@ -39,13 +39,14 @@ Apify.main(async () => {
 
   async function handlePageFunction({ request, $ }) {
     const { result, pseudoUrls } = pageFunction({ request, $ });
-    console.log(result, pseudoUrls);
+    console.log(pseudoUrls);
     const enqueued = await enqueueLinks({
       $,
       requestQueue,
       pseudoUrls,
       baseUrl: request.loadedUrl
     });
+    console.log(enqueued);
 
     console.log(`Enqueued ${enqueued.length} URLs.`);
     await Apify.pushData({ result });
