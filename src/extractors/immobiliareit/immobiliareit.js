@@ -1,24 +1,55 @@
 module.exports = function(context) {
-  const { $ } = context;
-  return getTitle();
+  const { $, request } = context;
+  return {
+    title: getTitle(),
+    url: request.loadedUrl,
+    price: getPrice(),
+    phone: getPhone(),
+    announcementCode: getAnnouncementCode(),
+    description: getDescription(),
+    address: getAddress()
+  };
 
   // ***********
 
-  function getPrice() {}
+  function getPrice() {
+    var price = $(".features__price > span:nth-child(1)")
+      .text()
+      .replace("€", "");
+    return parseInt(price, 10);
+  }
 
-  function getPhotos() {}
+  function getPhotos() {
+    console.log(request);
+  }
 
-  function getPhone() {}
+  function getPhone() {
+    return $(".contact-phone-modal > p:nth-child(3)")
+      .text()
+      .replace(/\s/g, "");
+  }
 
-  function getAnnouncementCode() {}
+  function getAnnouncementCode() {
+    return $("dl > .col-xs-12.col-sm-7")
+      .text()
+      .trim();
+  }
 
-  function getAddress() {}
+  function getAddress() {
+    return $(".im-address__content")
+      .text()
+      .trim();
+  }
 
-  function getDescription() {}
-
-  function getGeo() {}
+  function getDescription() {
+    return $(".description-text > div:nth-child(1)")
+      .text()
+      .trim();
+  }
 
   function getTitle() {
-    return $("title").text();
+    return $("title")
+      .text()
+      .trim();
   }
 };

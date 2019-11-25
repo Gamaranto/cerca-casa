@@ -29,8 +29,7 @@ Apify.main(async () => {
     maxRequestsPerCrawl: 20,
     requestList,
     requestQueue,
-    handlePageFunction,
-    useApifyProxies: true
+    handlePageFunction
   });
 
   await crawler.run();
@@ -39,14 +38,12 @@ Apify.main(async () => {
 
   async function handlePageFunction({ request, $ }) {
     const { result, pseudoUrls } = pageFunction({ request, $ });
-    console.log(pseudoUrls);
     const enqueued = await enqueueLinks({
       $,
       requestQueue,
       pseudoUrls,
       baseUrl: request.loadedUrl
     });
-    console.log(enqueued);
 
     console.log(`Enqueued ${enqueued.length} URLs.`);
     await Apify.pushData({ result });
