@@ -42,7 +42,8 @@ Apify.main(async () => {
       $,
       requestQueue,
       pseudoUrls,
-      baseUrl: request.loadedUrl
+      baseUrl: request.loadedUrl,
+      useApifyProxies: true
     });
 
     console.log(`Enqueued ${enqueued.length} URLs.`);
