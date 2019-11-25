@@ -12,7 +12,7 @@ Apify.main(async () => {
     throw new Error("Have you passed the correct INPUT ?");
   }
 
-  const { sources } = input;
+  const { sources, maxRequestsPerCrawl } = input;
 
   const pageFunction = routeContext(sources, extractors);
 
@@ -26,7 +26,7 @@ Apify.main(async () => {
   const requestQueue = await Apify.openRequestQueue();
 
   const crawler = new Apify.CheerioCrawler({
-    maxRequestsPerCrawl: 20,
+    maxRequestsPerCrawl,
     requestList,
     requestQueue,
     handlePageFunction
