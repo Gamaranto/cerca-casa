@@ -7,7 +7,8 @@ module.exports = function(context) {
     phone: getPhone(),
     announcementCode: getAnnouncementCode(),
     description: getDescription(),
-    address: getAddress()
+    address: getAddress(),
+    mq2: getMq2()
   };
 
   // ***********
@@ -51,5 +52,10 @@ module.exports = function(context) {
     return $("title")
       .text()
       .trim();
+  }
+
+  function getMq2() {
+    var mq2 = $("dl > dd:nth-child(8)").text();
+    return parseInt(mq2, 10);
   }
 };

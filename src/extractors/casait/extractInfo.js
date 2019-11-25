@@ -10,6 +10,7 @@ function extractInfo({ $, schema: rawSchema }) {
   var photos = getPhotos(schema);
   var phone = getPhone();
   var announcementCode = getAnnouncementCode();
+  var mq2 = getMq2();
   return {
     title,
     url,
@@ -19,7 +20,8 @@ function extractInfo({ $, schema: rawSchema }) {
     geo,
     photos,
     phone,
-    announcementCode
+    announcementCode,
+    mq2
   };
 
   // *****************
@@ -72,6 +74,10 @@ function extractInfo({ $, schema: rawSchema }) {
     return $(
       ".sidebar-form > div.contact-agency > div.agency-info > div.call-now > div.code-rif > ul > li > b:nth-child(1)"
     ).text();
+  }
+
+  function getMq2() {
+    return parseInt($(".mtq").text(), 10);
   }
 }
 

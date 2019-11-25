@@ -5,6 +5,7 @@ const {
 
 const extractors = require("./extractors/index");
 const routeContext = require("./utils/routeContext");
+const filterResults = require("./utils/filterResults");
 
 Apify.main(async () => {
   const input = await Apify.getInput();
@@ -12,7 +13,7 @@ Apify.main(async () => {
     throw new Error("Have you passed the correct INPUT ?");
   }
 
-  const { sources, maxRequestsPerCrawl } = input;
+  const { sources, maxRequestsPerCrawl, filters } = input;
 
   const pageFunction = routeContext(sources, extractors);
 
@@ -38,6 +39,7 @@ Apify.main(async () => {
 
   async function handlePageFunction({ request, $ }) {
     const { result, pseudoUrls } = pageFunction({ request, $ });
+
     const enqueued = await enqueueLinks({
       $,
       requestQueue,
@@ -47,6 +49,9 @@ Apify.main(async () => {
     });
 
     console.log(`Enqueued ${enqueued.length} URLs.`);
-    await Apify.pushData({ result });
+
+    if (filterResults(result, filters)) {
+      await Apify.pushData({ result });
+    }
   }
 });
