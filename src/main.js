@@ -30,7 +30,8 @@ Apify.main(async () => {
     maxRequestsPerCrawl,
     requestList,
     requestQueue,
-    handlePageFunction
+    handlePageFunction,
+    useApifyProxies: true
   });
 
   await crawler.run();
