@@ -5,7 +5,11 @@ Cerca Casa is an home scraper built to make it easy to find a place to call home
 
 ## How do I use this?
 
-In any way you want, really. You can use this as the backend for your self hosted real estate website, to populate a google sheet or anything you can think of. I personally run this as an actor on the Apify Cloud and I email the results of each run to myself every morning with a Zapier Integration.
+In any way you want, really. You can use this as the backend for your self hosted real estate website, to populate a google sheet or anything you can think of.
+
+If you wish to run this locally/self-hosted, you will need to change the values of the `INPUT.json` file. Change `YOUR_CITY_NAME` to the name of the city you want to search in and voilà, you're good to go.
+
+I personally run this as an actor on the Apify Cloud and I email the results of each run to myself every morning with a Zapier Integration.
 
 
 ## Do I need proxies to make this work?
