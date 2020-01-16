@@ -1,9 +1,18 @@
-# My beautiful actor
+# Cerca Casa - Home Scraper
 
-The `README.md` file contains a documentation what your actor does and how to use it,
-which is then displayed in the app or Apify Store. It's always a good
-idea to write a good `README.md`, in a few months not even you
-will remember all the details about the actor.
+## What is this? 
+Cerca Casa is an home scraper built to make it easy to find a place to call home in Italy. I was tired of the fragmentation and bad UI of the current real estate boards websites so I decided to scrape them and serialize the data here.
 
-You can use [Markdown](https://www.markdownguide.org/cheat-sheet)
-language for rich formatting.
+## How do I use this?
+
+In any way you want, really. You can use this as the backend for your self hosted real estate website, to populate a google sheet or anything you can think of. I personally run this as an actor on the Apify Cloud and I email the results of each run to myself every morning with a Zapier Integration.
+
+
+## Do I need proxies to make this work?
+
+Not really. Some sites will block you and you might get less results, usually when that happens you will get a 403 or some other error and proxies will solve it for you. Adding Apify proxies is really easy, while adding other proxies requires you to change the code manually (even if by a tiny bit).
+
+## How do I add my own scraping logic?
+
+Each website scraping logic is contained in a module. You can either modify the source code yourself for an existing website or add your own module for a website that's not supported yet.
+
