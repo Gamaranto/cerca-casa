@@ -1,4 +1,5 @@
 # This file tells Git which files shouldn't be added to source control
 
 node_modules
-apify_storage
+datasets
+request_queues

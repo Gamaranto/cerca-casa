@@ -1,0 +1,17 @@
+{
+  "sources": [
+    {
+      "url": "https://www.casa.it/affitto/residenziale/YOUR_CITY_NAME/",
+      "pseudoUrls": ["http[s?]://www.casa.it/[.*]/affitto/YOUR_CITY_NAME/[.*]"]
+    },
+    {
+      "url": "https://www.immobiliare.it/affitto-case/YOUR_CITY_NAME/",
+      "pseudoUrls": ["http[s?]://www.immobiliare.it/annunci/[.+]"]
+    }
+  ],
+  "maxRequestsPerCrawl": 20,
+  "filters": {
+    "minPrice": 350,
+    "maxPrice": 550
+  }
+}
